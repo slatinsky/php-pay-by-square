@@ -1,7 +1,7 @@
 ![](assets/example.png)
 
 # PHP Pay by square
-Umožnuje vytvárať jednoduché QR kódy pre platby Pay by square. Len prekopírujete na PHP hosting a máte hotovo :)
+Umožňuje vytvárať jednoduché QR kódy pre platby Pay by square. Len prekopírujete na PHP hosting a máte hotovo :)
 
 ## Závislosti
 - Len pre linuxový server - `/usr/bin/xz` musí existovať

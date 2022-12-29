@@ -7,7 +7,7 @@
 *    Author: dynamic
 *    Edited by: 8ctopus
 *    Code version: 2021-02-15
-*    Availability: https://github.com/WordPress/WordPress/blob/a2693fd8602e3263b5925b9d799ddd577202167d/wp-includes/formatting.php#L1528
+*    Availability: https://stackoverflow.com/a/10790734
 ***************************************************************************************/
 function remove_accents($string) {
 	if ( !preg_match('/[\x80-\xff]/', $string) )
