@@ -58,9 +58,12 @@ Dátum splatnosti je automaticky nastavený na aktuálny deň
 Nejde načítať QR kód v internet bankingu
 - Ukážkový QR kód nefunguje pre každú banku, pretože niektoré overujú existenciu IBANu (a ukážkový IBAN SK7700000000000000000000 neexistuje). Vložte svoj vlastný IBAN a vyskúšajte znova :)
 
+Nefunguje pre české účty
+- v Česku sa používa iná špecifikácia pay by square, teda toto riešenie je možné použiť výlučne len pre slovenské účty.
+
 ## Poďakovanie
-- [Ján Fečík](https://jan.fecik.sk/blog/qr-generator-platieb-pay-by-square-v-php/) za implementáciu algoritmu Pay by square v PHP, z ktorého bol tento projekt forknutý
-- [Alexandre Assouad (t0k4rt)](https://github.com/t0k4rt/phpqrcode) za generátor QR kódov
+- [Ján Fečík](https://jan.fecik.sk/blog/qr-generator-platieb-pay-by-square-v-php/) za implementáciu algoritmu generovania reťazcov Pay by square v PHP, z ktorého bol tento projekt forknutý
+- [Alexandre Assouad (t0k4rt)](https://github.com/t0k4rt/phpqrcode) za konverziu reťazcov na QR obrázky
 
 
 ## Licencia
