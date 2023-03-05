@@ -1,15 +1,30 @@
 ![](assets/example.png)
 
 # PHP Pay by square
-Umožňuje vytvárať jednoduché QR kódy pre platby Pay by square. Len prekopírujete na PHP hosting a máte hotovo :)
+Umožňuje vytvárať jednoduché QR kódy pre slovenské platby Pay by square. Len prekopírujete na PHP hosting a máte hotovo :)
 
-## Závislosti
-- Len pre linuxový server - `/usr/bin/xz` musí existovať
-- Testované s PHP 8 na Webhostingu Websupport.sk
+
 
 ## Inštalácia
-- Nakopírujte obsah repozitára na váš hosting
+Na výber sú dve možnosti inštalácie:
+- prekopírovanie na PHP hosting
+- alebo ako mikroslužba cez Docker
+
+Bez použitia dockera php skript funguje len na linuxových serveroch, pretože volá `/usr/bin/xz`. Taktiež PHP musí mať nainštalovaný modul `gd`. Testované s PHP 8 na Webhostingu Websupport.sk.
+### Inštalácia na PHP hostingu
+- nakopírujte obsah tohto repozitára na váš hosting
 - hlavny súbor je `qr.php`, ktorý je potrebné zavolať s parametrami (viac nižšie)
+
+### Inštalácia a spustenie pomocou Dockera
+```bash
+git clone https://github.com/slatinsky/php-pay-by-square
+cd php-pay-by-square
+docker build -t square .
+docker run -p 8080:80 -d --name square-instance square
+```
+Služba je dostupná na localhoste na porte 8080 - `http://localhost:8080/qr.php?...`.
+
+Zmeňte port `8080` v príkaze podľa potreby.
 
 ## Použitie na frontende
 HTML:
@@ -53,6 +68,8 @@ CSS:
 | cs            | Konštantný symbol                     | 0000                     | Len čísla, max 4 znaky   |
 
 Dátum splatnosti je automaticky nastavený na aktuálny deň
+
+Ukážkový QR kód je na začiatku tohto `README.md` súboru
 
 ## FAQ
 Nejde načítať QR kód v internet bankingu
