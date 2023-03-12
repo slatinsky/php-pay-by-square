@@ -38,21 +38,21 @@ CSS:
 ```css
 .qr-image {
     border: 5px solid #6FA4D7;
-    max-width: 300px;
-    width: 100%;
+    max-width: 100%;
+    width: 300px;
     height: auto;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
     padding: 20px;
-    margin: 20px;
+    margin: 20px 0 0 0;
     border-radius: 5px;
 }
 
 .qr-image-square {
-    max-width: 300px;
-    width: 100%;
-    margin: 5px 20px;
+    max-width: 100%;
+    width: 300px;
+    margin: 0 20px 20px 0;
 }
 ```
 
