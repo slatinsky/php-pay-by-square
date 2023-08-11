@@ -120,21 +120,36 @@ function remove_accents($string) {
 
 // price in format with max 2 decimal places
 // example 1234.56
-$price = $_GET['price'];
+if (isset($_GET['price']))
+	$price = $_GET['price'];
+else
+	// fail
+	die('price is missing');
 
 // payment note
 // Accents like č, š, ž, etc. are stripped
-$note = strtolower(remove_accents($_GET['note']));
+if (isset($_GET['note']))
+	$note = strtolower(remove_accents($_GET['note']));
+else
+	$note = '';
 
 // account number (IBAN)
 // example SK8011000000001234567890
 // no spaces
 // IMPORTANT - use your own account number, this example may not be working with your bank
-$iban = $_GET['iban'];
+if (isset($_GET['iban']))
+	$iban = $_GET['iban'];
+else
+	// fail
+	die('iban is missing');
 
 // bank identifier code (BIC / swift)
 // example TATRSKBX
-$swift = $_GET['swift'];
+if (isset($_GET['swift']))
+	$swift = $_GET['swift'];
+else
+	// fail
+	die('swift is missing');
 
 // todays date in format yyyymmdd
 // example 20170101
@@ -144,24 +159,34 @@ $date = date('Ymd');
 // max 10 digits
 // numbers only
 // example 1234567890
-$vs = $_GET['vs'];
+if (isset($_GET['vs']))
+	$vs = $_GET['vs'];
+else
+	$vs = '';
 
 // constant symbol
 // max 4 digits
 // numbers only
 // example 1234
-$ks = $_GET['cs'];
+if (isset($_GET['cs']))
+	$ks = $_GET['cs'];
+else
+	$ks = '';
 
 // specific symbol
 // max 10 digits
 // numbers only
 // example 1234567890
-$ss = $_GET['ss'];
+if (isset($_GET['ss']))
+	$ss = $_GET['ss'];
+else
+	$ss = '';
 
 
 
 
 // TODO: validate input
+
 
 
 
