@@ -1,17 +1,23 @@
 ![](assets/example.png)
 
 # PHP Pay by square
+
 Umožňuje vytvárať jednoduché QR kódy pre slovenské platby Pay by square. Len prekopírujete na PHP hosting a máte hotovo :)
+
+Vyskúšajte [interaktívne demo](https://qr.slada.sk/).
 
 
 
 ## Inštalácia
+
 Na výber sú dve možnosti inštalácie:
 - prekopírovanie na PHP hosting
 - alebo ako mikroslužba cez Docker
 
 Bez použitia dockera php skript funguje len na linuxových serveroch, pretože volá `/usr/bin/xz`. Taktiež PHP musí mať nainštalovaný modul `gd`. Testované s PHP 8 na Webhostingu Websupport.sk.
+
 ### Inštalácia na PHP hostingu
+
 - nakopírujte obsah tohto repozitára na váš hosting
 - hlavny súbor je `qr.php`, ktorý je potrebné zavolať s parametrami (viac nižšie)
 
@@ -27,33 +33,22 @@ Služba je dostupná na localhoste na porte 8080 - `http://localhost:8080/qr.php
 Zmeňte port `8080` v príkaze podľa potreby.
 
 ## Použitie na frontende
+
 HTML:
 ```html
-<img class="qr-image" src="https://qr.example.com/qr.php?price=5.01&note=jozko+mrkvicka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000" alt="">
-<br>
-<img class="qr-image-square" src="https://qr.example.com/assets/paybysquare.png" alt="">
-```
-
-CSS:
-```css
-.qr-image {
-    border: 5px solid #6FA4D7;
-    max-width: 100%;
-    width: 300px;
-    height: auto;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-    padding: 20px;
-    margin: 20px 0 0 0;
-    border-radius: 5px;
-}
-
-.qr-image-square {
-    max-width: 100%;
-    width: 300px;
-    margin: 0 20px 20px 0;
-}
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <link rel="stylesheet" href="https://qr.slada.sk/assets/qr.css">
+</head>
+<body>   
+    <img class="qr-image" src="https://qr.slada.sk/qr.php?price=5.01&note=jozko%20mrkvicka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000" alt="">
+    <div class="qr-bottom-txt">
+        <div><span class="qr-txt-blue">PAY</span> <span class="qr-txt-gray">by square</span></div>
+        <img class="qr-card" src="https://qr.slada.sk/assets/card.svg" alt="">
+    </div>
+</body>
+</html>
 ```
 
 ## Parametre pre qr.php

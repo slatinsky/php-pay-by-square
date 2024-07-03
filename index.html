@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>php-pay-by-square</title>
+    <link rel="stylesheet" href="/assets/qr.css">
+    <link rel="stylesheet" href="/assets/qr-demo.css">
+</head>
+<body>
+    <a href="https://github.com/slatinsky/php-pay-by-square">
+        <h1>php-pay-by-square</h1>
+    </a>
+    <div class="row">
+        <div id="inputs">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price" value="5.01" />
+
+            <label for="note">Note</label>
+            <input type="text" id="note" name="note" value="jozko mrkvicka" />
+
+            <label for="iban">IBAN</label>
+            <input type="text" id="iban" name="iban" value="SK7700000000000000000000" />
+
+            <label for="swift">SWIFT</label>
+            <input type="text" id="swift" name="swift" value="CEKOSKBX" />
+
+            <label for="vs">VS</label>
+            <input type="text" id="vs" name="vs" value="00000002" />
+
+            <label for="ss">SS</label>
+            <input type="text" id="ss" name="ss" value="2022" />
+
+            <label for="cs">CS</label>
+            <input type="text" id="cs" name="cs" value="0000" />
+        </div>
+        <div>
+            <img class="qr-image" src="/qr.php?price=5.01&note=jozko+mrkvicka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000" alt="">
+            <div class="qr-bottom-txt">
+                <div><span class="qr-txt-blue">PAY</span> <span class="qr-txt-gray">by square</span></div>
+                <img class="qr-card" src="/assets/card.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <pre id="code"></pre>
+
+
+
+    <script>
+        function refreshCode() {
+            const price = document.querySelector('#price').value;
+            const note = document.querySelector('#note').value;
+            const iban = document.querySelector('#iban').value;
+            const swift = document.querySelector('#swift').value;
+            const vs = document.querySelector('#vs').value;
+            const ss = document.querySelector('#ss').value;
+            const cs = document.querySelector('#cs').value;
+
+            const qrCode = `${window.location.origin}/qr.php?price=${encodeURIComponent(price)}&note=${encodeURIComponent(note)}&iban=${encodeURIComponent(iban)}&swift=${encodeURIComponent(swift)}&vs=${encodeURIComponent(vs)}&ss=${encodeURIComponent(ss)}&cs=${encodeURIComponent(cs)}`;
+            const qrImage = document.querySelector('.qr-image');
+            qrImage.src = qrCode;
+
+            const code = `<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <link rel="stylesheet" href="${window.location.origin}/assets/qr.css">
+</head>
+<body>   
+    <img class="qr-image" src="${qrCode}" alt="">
+    <div class="qr-bottom-txt">
+        <div><span class="qr-txt-blue">PAY</span> <span class="qr-txt-gray">by square</span></div>
+        <img class="qr-card" src="${window.location.origin}/assets/card.svg" alt="">
+    </div>
+</body>
+</html>`;
+            document.querySelector('pre').innerText = code;
+        }
+
+        refreshCode()
+
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', refreshCode);
+        });
+    </script>
+</body>
+</html>
