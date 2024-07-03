@@ -116,6 +116,7 @@ function remove_accents($string) {
 }
 
 
+$recipient = isset($_GET['recipient']) ? $_GET['recipient'] : '';
 
 
 // price in format with max 2 decimal places
@@ -213,7 +214,8 @@ $d = implode("\t", array(
 		$iban,	// IBAN
 		$swift,						// SWIFT
 		'0',
-		'0'
+		'0',
+		$recipient
 	))
 ));
 $d = strrev(hash("crc32b", $d, TRUE)) . $d;

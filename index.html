@@ -17,7 +17,10 @@
             <input type="text" id="price" name="price" value="5.01" />
 
             <label for="note">Note</label>
-            <input type="text" id="note" name="note" value="jozko mrkvicka" />
+            <input type="text" id="note" name="note" value="pre jozka" />
+
+            <label for="recipient">Recipient</label>
+            <input type="text" id="recipient" name="recipient" value="jozko mrkvicka" />
 
             <label for="iban">IBAN</label>
             <input type="text" id="iban" name="iban" value="SK7700000000000000000000" />
@@ -33,6 +36,8 @@
 
             <label for="cs">CS</label>
             <input type="text" id="cs" name="cs" value="0000" />
+
+
         </div>
         <div>
             <img class="qr-image" src="/qr.php?price=5.01&note=jozko+mrkvicka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000" alt="">
@@ -51,13 +56,14 @@
         function refreshCode() {
             const price = document.querySelector('#price').value;
             const note = document.querySelector('#note').value;
+            const recipient = document.querySelector('#recipient').value;
             const iban = document.querySelector('#iban').value;
             const swift = document.querySelector('#swift').value;
             const vs = document.querySelector('#vs').value;
             const ss = document.querySelector('#ss').value;
             const cs = document.querySelector('#cs').value;
 
-            const qrCode = `${window.location.origin}/qr.php?price=${encodeURIComponent(price)}&note=${encodeURIComponent(note)}&iban=${encodeURIComponent(iban)}&swift=${encodeURIComponent(swift)}&vs=${encodeURIComponent(vs)}&ss=${encodeURIComponent(ss)}&cs=${encodeURIComponent(cs)}`;
+            const qrCode = `${window.location.origin}/qr.php?price=${encodeURIComponent(price)}&note=${encodeURIComponent(note)}&iban=${encodeURIComponent(iban)}&swift=${encodeURIComponent(swift)}&vs=${encodeURIComponent(vs)}&ss=${encodeURIComponent(ss)}&cs=${encodeURIComponent(cs)}&recipient=${encodeURIComponent(recipient)}`;
             const qrImage = document.querySelector('.qr-image');
             qrImage.src = qrCode;
 

@@ -39,13 +39,13 @@ HTML:
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <link rel="stylesheet" href="https://qr.slada.sk/assets/qr.css">
+    <link rel="stylesheet" href="https://qr.example.com/assets/qr.css">
 </head>
 <body>   
-    <img class="qr-image" src="https://qr.slada.sk/qr.php?price=5.01&note=jozko%20mrkvicka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000" alt="">
+    <img class="qr-image" src="https://qr.example.com/qr.php?price=5.01&note=pre%20jozka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000&recipient=jozko%20mrkvicka" alt="">
     <div class="qr-bottom-txt">
         <div><span class="qr-txt-blue">PAY</span> <span class="qr-txt-gray">by square</span></div>
-        <img class="qr-card" src="https://qr.slada.sk/assets/card.svg" alt="">
+        <img class="qr-card" src="https://qr.example.com/assets/card.svg" alt="">
     </div>
 </body>
 </html>
@@ -55,7 +55,8 @@ HTML:
 | **Parameter** | **Popis**                             | **Ukážka**               | **Obmedzenie**           |
 |---------------|---------------------------------------|--------------------------|--------------------------|
 | price         | Cena                                  | 5.01                     | Max 2 desatinné miesta   |
-| note          | Poznámka k platbe                     | jozko+mrkvicka           | Max 35 znakov            |
+| note          | Poznámka k platbe                     | pre jozka                | Max 35 znakov            |
+| recipient     | Názov príjemcu                        | jozko mrkvicka           | ?                        |
 | iban          | Číslo účtu (IBAN)                     | SK7700000000000000000000 | Bez medzier              |
 | swift         | Bankový identifikačný kód (BIC/SWIFT) | CEKOSKBX                 |                          |
 | vs            | Variabilný symbol                     | 00000002                 | Len čísla, max 10 znakov |
