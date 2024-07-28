@@ -253,4 +253,4 @@ for ($i = 0;$i < $l;$i += 1) {
  *   Availability: https://github.com/t0k4rt/phpqrcode
 ***************************************************************************************/
 include('phpqrcode/qrlib.php');
-QRcode::png($d, false, QR_ECLEVEL_L, 1, 0);
+QRcode::png($d, false, QR_ECLEVEL_L, 6, 1);
