@@ -37,10 +37,16 @@
             <label for="cs">CS</label>
             <input type="text" id="cs" name="cs" value="0000" />
 
+            <label for="cs">pixelsize <span id="pixelsize-preview"></span></label>
+            <input type="range" id="pixelsize" name="pixelsize" min="1" max="50" value="1" step="1" />
+
+            <label for="cs">pixelpadding <span id="pixelpadding-preview"></span></label>
+            <input type="range" id="pixelpadding" name="pixelpadding" min="0" max="50" value="0" step="1" />
+
 
         </div>
         <div>
-            <img class="qr-image" src="/qr.php?price=5.01&note=jozko+mrkvicka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000" alt="">
+            <img class="qr-image" src="javascript:void(0)" alt="">
             <div class="qr-bottom-txt">
                 <div><span class="qr-txt-blue">PAY</span> <span class="qr-txt-gray">by square</span></div>
                 <img class="qr-card" src="/assets/card.svg" alt="">
@@ -53,17 +59,33 @@
 
 
     <script>
-        function refreshCode() {
-            const price = document.querySelector('#price').value;
-            const note = document.querySelector('#note').value;
-            const recipient = document.querySelector('#recipient').value;
-            const iban = document.querySelector('#iban').value;
-            const swift = document.querySelector('#swift').value;
-            const vs = document.querySelector('#vs').value;
-            const ss = document.querySelector('#ss').value;
-            const cs = document.querySelector('#cs').value;
+        const price = document.querySelector('#price');
+        const note = document.querySelector('#note');
+        const recipient = document.querySelector('#recipient');
+        const iban = document.querySelector('#iban');
+        const swift = document.querySelector('#swift');
+        const vs = document.querySelector('#vs');
+        const ss = document.querySelector('#ss');
+        const cs = document.querySelector('#cs');
+        const pixelsize = document.querySelector('#pixelsize');
+        const pixelpadding = document.querySelector('#pixelpadding');
+        const pixelpaddingpreview = document.querySelector('#pixelpadding-preview');
+        const pixelsizepreview = document.querySelector('#pixelsize-preview');
 
-            const qrCode = `${window.location.origin}/qr.php?price=${encodeURIComponent(price)}&note=${encodeURIComponent(note)}&iban=${encodeURIComponent(iban)}&swift=${encodeURIComponent(swift)}&vs=${encodeURIComponent(vs)}&ss=${encodeURIComponent(ss)}&cs=${encodeURIComponent(cs)}&recipient=${encodeURIComponent(recipient)}`;
+
+        pixelsize.addEventListener('focus', () => {
+            document.querySelector('.qr-image').classList.add('active');
+        });
+        pixelsize.addEventListener('blur', () => {
+            document.querySelector('.qr-image').classList.remove('active');
+        });
+
+        
+        function refreshCode() {
+            pixelsizepreview.innerText = pixelsize.value;
+            pixelpaddingpreview.innerText = pixelpadding.value;
+
+            const qrCode = `${window.location.origin}/qr.php?price=${encodeURIComponent(price.value)}&note=${encodeURIComponent(note.value)}&iban=${encodeURIComponent(iban.value)}&swift=${encodeURIComponent(swift.value)}&vs=${encodeURIComponent(vs.value)}&ss=${encodeURIComponent(ss.value)}&cs=${encodeURIComponent(cs.value)}&recipient=${encodeURIComponent(recipient.value)}&pixelsize=${encodeURIComponent(pixelsize.value)}&pixelpadding=${encodeURIComponent(pixelpadding.value)}`;
             const qrImage = document.querySelector('.qr-image');
             qrImage.src = qrCode;
 

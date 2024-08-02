@@ -66,3 +66,7 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+img.active {
+    image-rendering: unset !important;
+}

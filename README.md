@@ -42,7 +42,7 @@ HTML:
     <link rel="stylesheet" href="https://qr.example.com/assets/qr.css">
 </head>
 <body>   
-    <img class="qr-image" src="https://qr.example.com/qr.php?price=5.01&note=pre%20jozka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000&recipient=jozko%20mrkvicka" alt="">
+    <img class="qr-image" src="https://qr.example.com/qr.php?price=5.01&note=pre%20jozka&iban=SK7700000000000000000000&swift=CEKOSKBX&vs=00000002&ss=2022&cs=0000&recipient=jozko%20mrkvicka&pixelsize=1&pixelpadding=0" alt="">
     <div class="qr-bottom-txt">
         <div><span class="qr-txt-blue">PAY</span> <span class="qr-txt-gray">by square</span></div>
         <img class="qr-card" src="https://qr.example.com/assets/card.svg" alt="">
@@ -62,10 +62,14 @@ HTML:
 | vs            | Variabilný symbol                     | 00000002                 | Len čísla, max 10 znakov |
 | ss            | Špecifický symbol                     | 2022                     | Len čísla, max 10 znakov |
 | cs            | Konštantný symbol                     | 0000                     | Len čísla, max 4 znaky   |
+| pixelsize     | Veľkosť obrázka                       | 1                        | Číslo v rozsahu 1-50     |
+| pixelpadding  | Odsadenie obrázka                     | 0                        | Číslo v rozsahu 0-50     |
 
-Dátum splatnosti je automaticky nastavený na aktuálny deň
+Dátum splatnosti je automaticky nastavený na aktuálny deň.
 
-Ukážkový QR kód je na začiatku tohto `README.md` súboru
+Ukážkový QR kód je na začiatku tohto `README.md` súboru.
+
+`pixelsize` a `pixelpadding` nepotrebujete meniť ak QR kód zobrazujete v prehliadači. `image-rendering: crisp-edges` v css zabezpečí, že obrázok bude ostrý aj pri zväčšení a odsadenie je vyriešené pomocou `padding`-u v css.
 
 ## FAQ
 Nejde načítať QR kód v internet bankingu

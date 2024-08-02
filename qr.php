@@ -184,6 +184,37 @@ else
 	$ss = '';
 
 
+// pixelsize input
+// 1-50 (default 1)
+if (isset($_GET['pixelsize']))
+	$pixelsize = $_GET['pixelsize'];
+else
+	$pixelsize = 1;
+
+// validate pixelsize
+// check if numeric
+if (!is_numeric($pixelsize))
+	$pixelsize = 1;
+else if ($pixelsize < 1)
+	$pixelsize = 1;
+else if ($pixelsize > 50)
+	$pixelsize = 50;
+
+// pixelpadding input
+// 0-50 (default 0)
+if (isset($_GET['pixelpadding']))
+	$pixelpadding = $_GET['pixelpadding'];
+else
+	$pixelpadding = 0;
+
+// validate pixelpadding
+if (!is_numeric($pixelpadding))
+	$pixelpadding = 0;
+else if ($pixelpadding < 0)
+	$pixelpadding = 0;
+else if ($pixelpadding > 50)
+	$pixelpadding = 50;
+
 
 
 // TODO: validate input
@@ -253,4 +284,4 @@ for ($i = 0;$i < $l;$i += 1) {
  *   Availability: https://github.com/t0k4rt/phpqrcode
 ***************************************************************************************/
 include('phpqrcode/qrlib.php');
-QRcode::png($d, false, QR_ECLEVEL_L, 1, 0);
+QRcode::png($d, false, QR_ECLEVEL_L, $pixelsize, $pixelpadding);
