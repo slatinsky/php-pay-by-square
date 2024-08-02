@@ -1,4 +1,4 @@
-FROM php:8.2.4RC1-apache-bullseye
+FROM php:8.3.8-apache
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
