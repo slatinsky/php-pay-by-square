@@ -54,22 +54,30 @@ HTML:
 ## Parametre pre qr.php
 | **Parameter** | **Popis**                             | **Ukážka**               | **Obmedzenie**           |
 |---------------|---------------------------------------|--------------------------|--------------------------|
-| price         | Cena                                  | 5.01                     | Max 2 desatinné miesta   |
-| note          | Poznámka k platbe                     | pre jozka                | Max 35 znakov            |
-| recipient     | Názov príjemcu                        | jozko mrkvicka           | ?                        |
-| iban          | Číslo účtu (IBAN)                     | SK7700000000000000000000 | Bez medzier              |
-| swift         | Bankový identifikačný kód (BIC/SWIFT) | CEKOSKBX                 |                          |
+| price         | Cena                                  | 5.01                     | Povinný, desatinná bodka, max 2 desatinné miesta |
+| note          | Poznámka k platbe                     | pre jozka                | Max 140 znakov           |
+| recipient     | Názov príjemcu                        | jozko mrkvicka           | Povinný, max 70 znakov   |
+| iban          | Číslo účtu (IBAN)                     | SK7700000000000000000000 | Povinný, veľké písmená, bez medzier, max 34 znakov |
+| swift         | Bankový identifikačný kód (BIC/SWIFT) | CEKOSKBX                 | Povinný, veľké písmená, 8 alebo 11 znakov |
 | vs            | Variabilný symbol                     | 00000002                 | Len čísla, max 10 znakov |
 | ss            | Špecifický symbol                     | 2022                     | Len čísla, max 10 znakov |
 | cs            | Konštantný symbol                     | 0000                     | Len čísla, max 4 znaky   |
 | pixelsize     | Veľkosť obrázka                       | 1                        | Číslo v rozsahu 1-50     |
 | pixelpadding  | Odsadenie obrázka                     | 0                        | Číslo v rozsahu 0-50     |
 
+Obmedzenia vychádzajú zo [špecifikácie PAY by square 1.2.0](https://www.sbaonline.sk/projekt/projekty-z-oblasti-platobnych-sluzieb/). Ak parameter chýba alebo obmedzenie nespĺňa, `qr.php` namiesto obrázka vráti textovú chybu, napr. `recipient is missing`.
+
 Dátum splatnosti je automaticky nastavený na aktuálny deň.
 
 Ukážkový QR kód je na začiatku tohto `README.md` súboru.
 
 `pixelsize` a `pixelpadding` nepotrebujete meniť ak QR kód zobrazujete v prehliadači. `image-rendering: crisp-edges` v css zabezpečí, že obrázok bude ostrý aj pri zväčšení a odsadenie je vyriešené pomocou `padding`-u v css.
+
+## Testy
+Testy spustia aplikáciu v Dockeri, vygenerované QR kódy dekódujú a obsah overia voči špecifikácii PAY by square. Potrebujete len Docker:
+```bash
+tests/run.sh
+```
 
 ## FAQ
 Nejde načítať QR kód v internet bankingu

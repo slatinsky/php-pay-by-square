@@ -116,7 +116,10 @@ function remove_accents($string) {
 }
 
 
-$recipient = isset($_GET['recipient']) ? $_GET['recipient'] : '';
+// reject arrays like ?price[]=1
+foreach ($_GET as $value)
+	if (!is_string($value))
+		die('parameters must not be arrays');
 
 
 // price in format with max 2 decimal places
@@ -151,6 +154,15 @@ if (isset($_GET['swift']))
 else
 	// fail
 	die('swift is missing');
+
+// beneficiary name
+// required since PAY by square specifications 1.2.0
+// example Jozko Mrkvicka
+if (isset($_GET['recipient']) && $_GET['recipient'] !== '')
+	$recipient = $_GET['recipient'];
+else
+	// fail
+	die('recipient is missing');
 
 // todays date in format yyyymmdd
 // example 20170101
@@ -217,7 +229,22 @@ else if ($pixelpadding > 50)
 
 
 
-// TODO: validate input
+// validate input according to PAY by square specifications 1.2.0
+// https://www.sbaonline.sk/projekt/projekty-z-oblasti-platobnych-sluzieb/
+$rules = array(
+	// value, pattern, error message
+	array($price, '/^\d{1,12}(\.\d{1,2})?$/D', 'price must be a number with max 2 decimal places'),
+	array($iban, '/^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/D', 'iban must be max 34 uppercase letters and digits without spaces'),
+	array($swift, '/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/D', 'swift must be 8 or 11 uppercase letters and digits'),
+	array($vs, '/^\d{0,10}$/D', 'vs must be max 10 digits'),
+	array($ks, '/^\d{0,4}$/D', 'cs must be max 4 digits'),
+	array($ss, '/^\d{0,10}$/D', 'ss must be max 10 digits'),
+	array($note, '/^.{0,140}$/Dsu', 'note must be UTF-8 text with max 140 characters'),
+	array($recipient, '/^.{1,70}$/Dsu', 'recipient must be UTF-8 text with max 70 characters'),
+);
+foreach ($rules as $rule)
+	if (!preg_match($rule[1], $rule[0]))
+		die($rule[2]);
 
 
 
@@ -231,7 +258,8 @@ else if ($pixelpadding > 50)
 $d = implode("\t", array(
 	0 => '',
 	1 => '1',
-	2 => implode("\t", array(
+	// tabs separate fields, so tabs inside values are replaced with spaces
+	2 => implode("\t", str_replace("\t", ' ', array(
 		true,
 		$price,						// SUMA
 		'EUR',						// JEDNOTKA
@@ -247,7 +275,7 @@ $d = implode("\t", array(
 		'0',
 		'0',
 		$recipient
-	))
+	)))
 ));
 $d = strrev(hash("crc32b", $d, TRUE)) . $d;
 $x = proc_open("/usr/bin/xz '--format=raw' '--lzma1=lc=3,lp=0,pb=2,dict=128KiB' '-c' '-'", [0 => ["pipe", "r"], 1 => ["pipe", "w"]], $p);
